@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-struct movieListRowView: View {
+struct MovieListRowView: View {
   var movie: Movie
   
     var body: some View {
       HStack {
         MoviePosterView(posterPath: movie.posterPath)
-          //.frame(width: 100, height: 150)
-          //.fixedSize(horizontal: false, vertical: true)
           .frame(maxWidth: 120, maxHeight: 150)
         VStack(alignment: .leading, spacing: 10) {
           Text(movie.title)
@@ -37,8 +35,9 @@ struct movieListRowView: View {
     }
 }
 
+/*
 #Preview {
-  movieListRowView(movie: Movie(
+  MovieListRowView(movie: Movie(
     id: 365177,
     overview: "Returning to her home planet, an infamous bounty hunter forms an unexpected alliance with a team of unlikely heroes. Together, they battle monsters and dangerous bandits to protect a young girl who holds the key to unimaginable power.",
     releaseDate: "2024-08-07",
@@ -50,3 +49,4 @@ struct movieListRowView: View {
   ))
   .background(Color.theme.backgroundColor)
 }
+*/

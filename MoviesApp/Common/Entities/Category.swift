@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum Category: String {
+  case popular = "Popular"
+  case upcoming = "Upcoming"
+  case topRated = "TopRated"
+  case nowPlaying = "NowPlaying"
+}

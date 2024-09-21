@@ -6,3 +6,19 @@
 //
 
 import Foundation
+import Combine
+
+final class HomeGetUpcomingUseCase: HomeGetUpcomingUseCaseProtocol {
+  private let repository: HomeMovieRepositoryProtocol
+
+  init(
+    repository: HomeMovieRepositoryProtocol
+  ) {
+    self.repository = repository
+  }
+  
+  func execute() -> AnyPublisher<[Movie], Error> {
+    return repository.getUpcomingRequest()
+      .eraseToAnyPublisher()
+  }
+}

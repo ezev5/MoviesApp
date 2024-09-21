@@ -8,6 +8,17 @@
 import Foundation
 import CoreData
 
+protocol CoreDataMovieMapperProtocol {
+  func transform(
+    from model: Movie,
+    context: NSManagedObjectContext
+  ) -> MovieEntity
+  
+  func transform(
+    from model: MovieEntity
+  ) -> Movie
+}
+
 struct CoreDataMovieMapper: CoreDataMovieMapperProtocol {
   func transform(from model: Movie, context: NSManagedObjectContext) -> MovieEntity {
     return MovieEntity(
@@ -16,8 +27,8 @@ struct CoreDataMovieMapper: CoreDataMovieMapperProtocol {
       overview: model.overview,
       releaseDate: model.releaseDate,
       title: model.title,
-      backdropPath: model.backdropPath,
-      posterPath: model.posterPath,
+      backdropPath: model.backdropPath ?? "",
+      posterPath: model.posterPath ?? "",
       voteAverage: model.voteAverage
     )
   }

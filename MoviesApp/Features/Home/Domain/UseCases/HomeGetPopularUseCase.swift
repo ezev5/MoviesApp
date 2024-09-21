@@ -6,3 +6,19 @@
 //
 
 import Foundation
+import Combine
+
+final class HomeGetPopularUseCase: HomeGetPopularUseCaseProtocol {
+  private let repository: HomeMovieRepositoryProtocol
+
+  init(
+    repository: HomeMovieRepositoryProtocol
+  ) {
+    self.repository = repository
+  }
+  
+  func execute() -> AnyPublisher<[Movie], Error> {
+    return repository.getPopularRequest()
+      .eraseToAnyPublisher()
+  }
+}

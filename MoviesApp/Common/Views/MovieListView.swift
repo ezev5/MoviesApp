@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct MovieListView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var movies: [Movie]
+  
+  var body: some View {
+    List(movies, id: \.id) { movie in
+      NavigationLink(value: movie) {
+        MovieListRowView(movie: movie)
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .listRowBackground(Color.theme.backgroundColor)
+      .listRowSeparator(.hidden)
     }
-}
-
-#Preview {
-    MovieListView()
+    .listStyle(.plain)
+    .background(Color.theme.backgroundColor)
+    .scrollContentBackground(.hidden)
+  }
 }

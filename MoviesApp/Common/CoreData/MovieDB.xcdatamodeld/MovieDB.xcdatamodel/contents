@@ -13,5 +13,10 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="voteAverage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="category" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="movies" inverseEntity="CategoryEntity"/>
+        <relationship name="watchList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WatchListEntity" inverseName="movies" inverseEntity="WatchListEntity"/>
+    </entity>
+    <entity name="WatchListEntity" representedClassName="WatchListEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieEntity" inverseName="watchList" inverseEntity="MovieEntity"/>
     </entity>
 </model>

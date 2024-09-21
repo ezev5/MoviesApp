@@ -1,5 +1,48 @@
 {
   "sourceLanguage" : "en",
-  "strings" : {},
+  "strings" : {
+    "" : {
+
+    },
+    "%lld" : {
+
+    },
+    "148 Minutes" : {
+
+    },
+    "Action" : {
+
+    },
+    "Detail" : {
+
+    },
+    "Find your movie by Type title." : {
+
+    },
+    "Now Playing" : {
+
+    },
+    "Search" : {
+
+    },
+    "There is No Movie Yet!" : {
+
+    },
+    "Top Rated" : {
+
+    },
+    "Upcoming" : {
+
+    },
+    "Watch List" : {
+
+    },
+    "We Are Sorry, We Can Not Find The Movie :(" : {
+
+    },
+    "What do you want to watch?" : {
+
+    }
+  },
   "version" : "1.0"
 }
