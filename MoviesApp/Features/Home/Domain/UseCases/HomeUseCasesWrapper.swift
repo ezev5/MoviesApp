@@ -24,5 +24,4 @@ final class HomeUseCasesWrapper: HomeUseCasesWrapperProtocol {
     self.getUpcomingUseCase = getUpcomingUseCase
     self.getTopRatedUseCase = getTopRatedUseCase
   }
-
 }
