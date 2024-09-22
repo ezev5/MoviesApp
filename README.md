@@ -1,5 +1,7 @@
 # MoviesApp
 
+https://github.com/user-attachments/assets/4a4be58d-ad71-479c-9b3f-f38f4c545bd7
+
 Answer and write into a Readme file the following questions
 1. What does the single responsibility principle consist of? What's its purpose?
 The single responsibility principle asserts that each class should focus on a single responsibility. The aim is to prevent a class from being overloaded with multiple functions, ensuring that it is dedicated to a specific, well-defined task.
