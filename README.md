@@ -8,5 +8,4 @@ The single responsibility principle asserts that each class should focus on a si
 "Good" or clean code is well-structured code that is easy to understand, making maintenance simpler.
 
 3. Detail how you would do everything that you have not completed.
-I still need to add the functionality to play trailer to the detail screen, which can be implemented using AVPlayer, UIView, or an external library.
-Additionally, I also need to add unit testing, which should be included for the view models, use cases, repositories, and data manager.
+Complete the unitTesting of the remaining useCases, also the test of all clases in Data layer, and ViewModels.

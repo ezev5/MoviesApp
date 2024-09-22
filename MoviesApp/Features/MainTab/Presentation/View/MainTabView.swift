@@ -39,8 +39,8 @@ struct MainTabView<ViewModel: MainTabViewModelProtocol>: View {
   }
 }
 
-
+/*
 #Preview {
   MainTabView(viewModel: MainTabViewModel())
 }
-
+*/

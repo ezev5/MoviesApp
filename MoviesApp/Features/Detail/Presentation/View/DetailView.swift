@@ -153,6 +153,7 @@ struct DetailView<ViewModel: DetailViewModelProtocol>: View {
   }
 }
 
+/*
 #Preview {
   NavigationStack{
     DetailWireframe.getView(movie: Movie(
@@ -167,4 +168,5 @@ struct DetailView<ViewModel: DetailViewModelProtocol>: View {
     ))
   }
 }
+*/
 
