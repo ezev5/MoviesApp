@@ -34,6 +34,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             }
         }
       }
+      //.padding(.top, 50)
       .background {
         Color.theme.backgroundColor.ignoresSafeArea()
       }
@@ -89,8 +90,6 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 
 /*
 #Preview {
-  NavigationStack {
-    HomeWireframe.getView(activeTabIndex: .constant(.home))
-  }
+  HomeWireframe.getView(activeTabIndex: .constant(.home))
 }
 */

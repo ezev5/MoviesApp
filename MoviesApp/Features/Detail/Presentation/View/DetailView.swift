@@ -10,74 +10,112 @@ import AVKit
 
 struct DetailView<ViewModel: DetailViewModelProtocol>: View {
   @StateObject var viewModel: ViewModel
+  @State var playVideo: Bool = false
   
   var body: some View {
-    VStack {
-      ZStack(alignment: .top) {
-        //TODO: add video
-        backgroundImage
-          .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 250)
-        VStack {
-          HStack {
-            MoviePosterView(posterPath: viewModel.movie.posterPath)
-              .frame(width: 100, height: 150)
-            VStack {
-              HStack {
-                Spacer()
-                Label(String(format: "%.1f", viewModel.movie.voteAverage), systemImage: "star")
-                  .foregroundStyle(Color.theme.ratingColor)
-                  .padding(5)
-                  .background(Color.theme.secondaryColor)
-                  .clipShape(RoundedRectangle(cornerRadius: 10))
-              }
-              Text(viewModel.movie.title)
-                .font(.title)
-                .fontWeight(.bold)
+    ZStack {
+      VStack {
+        ZStack(alignment: .top) {
+          Color.theme.backgroundColor.ignoresSafeArea()
+          backgroundImage
+          VStack {
+            posterAndTitleView
+              .padding(.horizontal, 20)
+            detailsView
+            ScrollView {
+              Text(viewModel.movie.overview)
                 .foregroundStyle(Color.theme.primaryColor)
-                .padding(.top, 10)
             }
-          }
-          .padding(.horizontal, 20)
-          HStack {
-            Label(viewModel.movie.releaseDate, systemImage: "calendar")
-              .foregroundStyle(Color.theme.secondaryColor)
-            Divider()
-              .background(Color.theme.secondaryColor)
-              .frame(height: 30)
-            //TODO: this information don't came from service
-            Label("148 Minutes", systemImage: "clock")
-              .foregroundStyle(Color.theme.secondaryColor)
-            Divider()
-              .background(Color.theme.secondaryColor)
-              .frame(height: 30)
-            //TODO: get the name of the genre from another service
-            Label("Action", systemImage: "ticket")
-              .foregroundStyle(Color.theme.secondaryColor)
-          }
-          Text(viewModel.movie.overview)
-            .foregroundStyle(Color.theme.primaryColor)
             .padding(24)
-          Spacer()
+            Spacer()
+          }
+          .padding(.top, 180)
         }
-        .padding(.top, 180)
       }
-      .background(Color.theme.backgroundColor)
-    }
-    .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      ToolbarItem(placement: .principal) {
-        Text("Detail")
-          .font(.title2)
-          .foregroundColor(Color.theme.primaryColor)
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          Text("Detail")
+            .font(.title2)
+            .foregroundColor(Color.theme.primaryColor)
+        }
+      }
+      .toolbar {
+        Button(action: {
+          viewModel.saveButtonTaped()
+        }, label: {
+          Image(systemName: "bookmark.fill")
+            .tint(Color.theme.primaryColor)
+        })
+      }
+      if playVideo {
+        videoView
+          .transition(.asymmetric(
+            insertion: .scale,
+            removal: .opacity
+          )
+          )
       }
     }
-    .toolbar {
-      Button(action: {
-        viewModel.saveButtonTaped()
-      }, label: {
-        Image(systemName: "bookmark.fill")
-          .tint(Color.theme.primaryColor)
-      })
+    .onAppear{
+      viewModel.getVideoId()
+    }
+  }
+  
+  private var posterAndTitleView: some View {
+    HStack {
+      MoviePosterView(posterPath: viewModel.movie.posterPath)
+        .frame(width: 100, height: 150)
+      VStack {
+        HStack {
+          Spacer()
+          Label(String(format: "%.1f", viewModel.movie.voteAverage), systemImage: "star")
+            .foregroundStyle(Color.theme.ratingColor)
+            .padding(5)
+            .background(Color.theme.secondaryColor)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+        Text(viewModel.movie.title)
+          .font(.title)
+          .fontWeight(.bold)
+          .foregroundStyle(Color.theme.primaryColor)
+          .padding(.top, 10)
+      }
+    }
+  }
+  
+  private var detailsView: some View {
+    HStack {
+      Label(viewModel.movie.releaseDate, systemImage: "calendar")
+        .foregroundStyle(Color.theme.secondaryColor)
+      Divider()
+        .background(Color.theme.secondaryColor)
+        .frame(height: 30)
+      //TODO: this information don't came from service
+      Label("148 Minutes", systemImage: "clock")
+        .foregroundStyle(Color.theme.secondaryColor)
+      Divider()
+        .background(Color.theme.secondaryColor)
+        .frame(height: 30)
+      //TODO: get the name of the genre from another service
+      Label("Action", systemImage: "ticket")
+        .foregroundStyle(Color.theme.secondaryColor)
+    }
+  }
+  
+  private var videoView: some View {
+    ZStack {
+      Color.theme.backgroundColor
+        .ignoresSafeArea()
+        .opacity(0.7)
+        .onTapGesture {
+          withAnimation {
+            playVideo.toggle()
+          }
+        }
+      VideoView(videoId: viewModel.videoId)
+        .aspectRatio(1.7, contentMode: .fit)
+        .padding()
     }
   }
   
@@ -100,10 +138,21 @@ struct DetailView<ViewModel: DetailViewModelProtocol>: View {
           .foregroundStyle(Color.theme.secondaryColor)
       }
     }
+    .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 250)
+    .overlay {
+      Image(systemName: "play.circle")
+        .font(.system(size: 96))
+        .foregroundStyle(Color.theme.primaryColor)
+        .shadow(color: .black.opacity(0.5), radius: 5)
+        .onTapGesture {
+          withAnimation {
+            playVideo.toggle()
+          }
+        }
+    }
   }
 }
 
-/*
 #Preview {
   NavigationStack{
     DetailWireframe.getView(movie: Movie(
@@ -118,4 +167,4 @@ struct DetailView<ViewModel: DetailViewModelProtocol>: View {
     ))
   }
 }
-*/
+

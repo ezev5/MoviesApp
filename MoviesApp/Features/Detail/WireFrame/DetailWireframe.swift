@@ -13,19 +13,34 @@ final class DetailWireframe {
     
     let localDataManager: AddToWatchListLocalDataManagerProtocol = AddToWatchListLocalDataManager()
     
-    let repository: AddToWatchListRepositoryProtocol = AddToWatchListRepository(
+    let remoteDataManager: GetMovieIdDataManagerProtocol = GetMovieIdDataManager()
+    
+    let getVideoIdRepository: GetVideoIdRepositoryProtocol = GetVideoIdRepository(
+      remoteDataManager: remoteDataManager
+    )
+    
+    let addToWatchLisRepository: AddToWatchListRepositoryProtocol = AddToWatchListRepository(
       localDataManager: localDataManager
     )
     
-    let useCase: AddToWatchListUseCaseProtocol = AddToWatchListMovieUseCase(
-      repository: repository
+    let getVideoIdUseCase: GetVideoIdUseCaseProtocol = GetVideoIdUseCase(
+      repository: getVideoIdRepository
+    )
+    
+    let addToWatchListUseCase: AddToWatchListUseCaseProtocol = AddToWatchListMovieUseCase(
+      repository: addToWatchLisRepository
+    )
+    
+    let useCasesWrapper: DetailUseCasesWrapperProtocol = DetailUseCasesWrapper(
+      addToWatchListUseCase: addToWatchListUseCase,
+      getVideoIdUseCase: getVideoIdUseCase
     )
 
     return DetailView(
       viewModel:
         DetailViewModel(
           movie: movie,
-          useCase: useCase
+          useCasesWrapper: useCasesWrapper
         )
     )
   }

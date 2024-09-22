@@ -16,12 +16,14 @@ enum Endpoint {
   private static let topRatedPath: String = "top_rated"
   private static let genresPath: String = "genre/movie/list"
   private static let searchPath: String = "https://api.themoviedb.org/3/search/movie"
+  private static let videoPath: String = "/videos"
   
   case popular
   case nowPlaying
   case upComing
   case topRated
   case search
+  case videoId(Int)
   
   var servicePath: String {
     switch self {
@@ -30,6 +32,7 @@ enum Endpoint {
     case .upComing: return Endpoint.baseURL + Endpoint.upcomingPath
     case .topRated: return Endpoint.baseURL + Endpoint.topRatedPath
     case .search: return Endpoint.searchPath
+    case .videoId(let movieId): return Endpoint.baseURL + "\(movieId)" + Endpoint.videoPath
     }
   }
   
